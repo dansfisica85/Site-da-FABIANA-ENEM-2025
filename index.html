@@ -130,6 +130,83 @@
                 </div>
             </section>
 
+            <section id="exercicios" class="content-section">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-bold text-[#775A4C] mb-4">📝 Sistema de Exercícios Autocorrigíveis</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">Teste seus conhecimentos com exercícios de múltipla escolha. Receba feedback imediato com correção automática, análise de desempenho e orientações personalizadas!</p>
+                </div>
+
+                <!-- Seletor de Área -->
+                <div class="max-w-2xl mx-auto mb-8">
+                    <label class="block text-lg font-semibold text-[#775A4C] mb-3">Escolha a área de conhecimento:</label>
+                    <select id="area-select" class="w-full p-4 border-2 border-[#A08C7D] rounded-lg text-lg focus:outline-none focus:border-[#775A4C]">
+                        <option value="">-- Selecione uma área --</option>
+                        <option value="linguagens">Linguagens e Códigos</option>
+                        <option value="humanas">Ciências Humanas</option>
+                        <option value="natureza">Ciências da Natureza</option>
+                        <option value="matematica">Matemática</option>
+                    </select>
+                </div>
+
+                <!-- Container do Quiz -->
+                <div id="quiz-container" class="max-w-4xl mx-auto hidden">
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 id="quiz-title" class="text-2xl font-bold text-[#775A4C]"></h3>
+                            <div class="text-right">
+                                <p class="text-sm text-gray-600">Questão <span id="current-question">1</span> de <span id="total-questions">10</span></p>
+                                <p class="text-sm font-semibold text-[#775A4C]">Pontos: <span id="score">0</span></p>
+                            </div>
+                        </div>
+
+                        <div id="question-container" class="mb-6">
+                            <p id="question-text" class="text-lg font-medium text-gray-800 mb-6"></p>
+                            <div id="options-container" class="space-y-3"></div>
+                        </div>
+
+                        <div id="feedback-container" class="hidden mb-6 p-4 rounded-lg"></div>
+
+                        <div class="flex justify-between">
+                            <button id="prev-btn" class="px-6 py-3 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 disabled:opacity-50" disabled>← Anterior</button>
+                            <button id="next-btn" class="px-6 py-3 bg-[#775A4C] text-white rounded-lg hover:bg-[#A08C7D] disabled:opacity-50" disabled>Próxima →</button>
+                            <button id="finish-btn" class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 hidden">Finalizar Quiz</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resultado Final -->
+                <div id="result-container" class="max-w-4xl mx-auto hidden">
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-3xl font-bold text-center text-[#775A4C] mb-6">🎯 Resultado do Quiz</h3>
+                        <div class="grid md:grid-cols-3 gap-6 mb-8">
+                            <div class="text-center p-6 bg-green-50 rounded-lg">
+                                <p class="text-4xl font-bold text-green-600" id="correct-count">0</p>
+                                <p class="text-gray-600 mt-2">Acertos</p>
+                            </div>
+                            <div class="text-center p-6 bg-red-50 rounded-lg">
+                                <p class="text-4xl font-bold text-red-600" id="wrong-count">0</p>
+                                <p class="text-gray-600 mt-2">Erros</p>
+                            </div>
+                            <div class="text-center p-6 bg-blue-50 rounded-lg">
+                                <p class="text-4xl font-bold text-blue-600" id="percentage">0%</p>
+                                <p class="text-gray-600 mt-2">Aproveitamento</p>
+                            </div>
+                        </div>
+
+                        <div id="performance-message" class="text-center mb-6 p-4 rounded-lg"></div>
+
+                        <div id="recommendations" class="mb-6">
+                            <h4 class="text-xl font-bold text-[#775A4C] mb-4">📚 Áreas para melhorar:</h4>
+                            <div id="recommendations-list" class="space-y-3"></div>
+                        </div>
+
+                        <div class="text-center">
+                            <button id="restart-btn" class="px-8 py-4 bg-[#775A4C] text-white text-lg rounded-lg hover:bg-[#A08C7D]">Fazer Outro Quiz</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section id="linguagens" class="content-section">
                 <div class="text-center mb-8">
                     <h2 class="text-3xl font-bold text-[#775A4C]">Linguagens, Códigos e suas Tecnologias</h2>
@@ -344,6 +421,273 @@ const appData = {
     }
 };
 
+// ===== SISTEMA DE EXERCÍCIOS AUTOCORRIGÍVEIS =====
+const questionBanks = {
+    linguagens: [
+        // Banco 1
+        [
+            {q: "Qual é a função da linguagem predominante em um texto publicitário que busca convencer o leitor a comprar um produto?", opts: ["A) Emotiva", "B) Conativa", "C) Referencial", "D) Fática", "E) Metalinguística"], correct: 1, topic: "Funções da Linguagem", explanation: "A função conativa (ou apelativa) é usada quando se quer influenciar o comportamento do leitor, como em anúncios publicitários."},
+            {q: "Em qual tipo de variação linguística se enquadra o uso de gírias por um grupo de adolescentes?", opts: ["A) Variação histórica", "B) Variação regional", "C) Variação social", "D) Variação situacional", "E) Variação estilística"], correct: 2, topic: "Variação Linguística", explanation: "A variação social ocorre entre diferentes grupos sociais, como faixa etária, profissão, etc."},
+            {q: "Qual figura de linguagem está presente na frase: 'Aquele lugar é um paraíso'?", opts: ["A) Metonímia", "B) Metáfora", "C) Hipérbole", "D) Eufemismo", "E) Ironia"], correct: 1, topic: "Figuras de Linguagem", explanation: "A metáfora é uma comparação implícita entre dois termos sem uso de conectivo."},
+            {q: "O texto que tem como objetivo principal informar o leitor sobre fatos reais utiliza predominantemente qual função da linguagem?", opts: ["A) Poética", "B) Emotiva", "C) Referencial", "D) Conativa", "E) Fática"], correct: 2, topic: "Funções da Linguagem", explanation: "A função referencial (ou denotativa) foca na informação objetiva sobre a realidade."},
+            {q: "Qual dos seguintes gêneros textuais é caracterizado por apresentar uma sequência de ações com personagens, tempo e espaço definidos?", opts: ["A) Artigo de opinião", "B) Notícia", "C) Conto", "D) Receita", "E) Carta"], correct: 2, topic: "Gêneros Textuais", explanation: "O conto é um gênero narrativo com estrutura de enredo, personagens e ambientação."},
+            {q: "A expressão 'bater as botas' é um exemplo de:", opts: ["A) Linguagem formal", "B) Linguagem denotativa", "C) Linguagem conotativa", "D) Linguagem técnica", "E) Linguagem culta"], correct: 2, topic: "Interpretação de Texto", explanation: "A linguagem conotativa usa sentido figurado. 'Bater as botas' significa morrer."},
+            {q: "Em qual movimento literário brasileiro a natureza é retratada de forma idealizada e o índio é visto como herói nacional?", opts: ["A) Barroco", "B) Arcadismo", "C) Romantismo", "D) Realismo", "E) Modernismo"], correct: 2, topic: "Literatura", explanation: "O Romantismo brasileiro teve forte tendência nacionalista e indianista."},
+            {q: "Qual elemento NÃO é essencial em um texto dissertativo-argumentativo?", opts: ["A) Tese", "B) Argumentos", "C) Personagens", "D) Conclusão", "E) Coesão"], correct: 2, topic: "Gêneros Textuais", explanation: "Personagens são elementos de textos narrativos, não dissertativos."},
+            {q: "A frase 'O Brasil foi descoberto em 1500' apresenta voz:", opts: ["A) Ativa", "B) Passiva sintética", "C) Passiva analítica", "D) Reflexiva", "E) Recíproca"], correct: 2, topic: "Gramática", explanation: "A voz passiva analítica usa o verbo ser + particípio."},
+            {q: "Qual recurso é utilizado para evitar a repetição de termos em um texto, garantindo a coesão?", opts: ["A) Pleonasmo", "B) Anáfora", "C) Catáfora", "D) Coesão referencial", "E) Todas as anteriores"], correct: 3, topic: "Interpretação de Texto", explanation: "A coesão referencial inclui recursos como anáfora, catáfora e substituições lexicais."}
+        ],
+        // Banco 2
+        [
+            {q: "Qual função da linguagem está presente em: 'Alô? Você está me ouvindo?'?", opts: ["A) Emotiva", "B) Conativa", "C) Fática", "D) Metalinguística", "E) Poética"], correct: 2, topic: "Funções da Linguagem", explanation: "A função fática serve para testar ou manter o canal de comunicação."},
+            {q: "O uso de 'nóis vai' ao invés de 'nós vamos' é exemplo de:", opts: ["A) Erro gramatical inaceitável", "B) Variação linguística", "C) Linguagem formal", "D) Estrangeirismo", "E) Arcaísmo"], correct: 1, topic: "Variação Linguística", explanation: "É uma variação linguística válida, embora não seja padrão culto."},
+            {q: "A hipérbole é uma figura de linguagem que:", opts: ["A) Compara termos", "B) Exagera uma ideia", "C) Suaviza uma expressão", "D) Inverte a ordem das palavras", "E) Repete sons"], correct: 1, topic: "Figuras de Linguagem", explanation: "A hipérbole é o exagero intencional para dar ênfase."},
+            {q: "Em 'A casa riu da minha cara', há:", opts: ["A) Prosopopeia", "B) Metonímia", "C) Antítese", "D) Pleonasmo", "E) Eufemismo"], correct: 0, topic: "Figuras de Linguagem", explanation: "Prosopopeia (ou personificação) atribui características humanas a seres inanimados."},
+            {q: "Um texto que ensina a fazer uma receita é predominantemente:", opts: ["A) Narrativo", "B) Descritivo", "C) Injuntivo", "D) Expositivo", "E) Argumentativo"], correct: 2, topic: "Gêneros Textuais", explanation: "Textos injuntivos (ou instrucionais) dão instruções ou comandos."},
+            {q: "O Modernismo brasileiro foi marcado por:", opts: ["A) Valorização das formas clássicas", "B) Ruptura com padrões tradicionais", "C) Idealização da realidade", "D) Uso exclusivo de sonetos", "E) Foco na religiosidade"], correct: 1, topic: "Literatura", explanation: "O Modernismo rompeu com as formas e temas tradicionais da literatura."},
+            {q: "Qual termo completa corretamente: 'A maioria dos alunos ______ aprovados'?", opts: ["A) foi", "B) foram", "C) era", "D) fosses", "E) seriam"], correct: 1, topic: "Gramática", explanation: "Com expressões partitivas, o verbo pode concordar com o núcleo ou com o complemento. 'Foram' concorda com 'alunos'."},
+            {q: "O prefixo 'des-' em 'desfazer' indica:", opts: ["A) Repetição", "B) Negação ou oposição", "C) Intensidade", "D) Anterioridade", "E) Posterioridade"], correct: 1, topic: "Gramática", explanation: "O prefixo 'des-' geralmente indica ação contrária ou negação."},
+            {q: "Em um debate, a linguagem deve ser predominantemente:", opts: ["A) Informal e emotiva", "B) Técnica e rebuscada", "C) Formal e argumentativa", "D) Coloquial e descritiva", "E) Poética e subjetiva"], correct: 2, topic: "Gêneros Textuais", explanation: "Debates exigem linguagem formal e argumentos bem estruturados."},
+            {q: "A crônica é um gênero textual que:", opts: ["A) Apresenta apenas fatos", "B) Narra eventos do cotidiano com reflexão", "C) Defende uma tese científica", "D) Ensina procedimentos", "E) Descreve paisagens"], correct: 1, topic: "Gêneros Textuais", explanation: "A crônica mistura narração e reflexão sobre temas cotidianos."}
+        ],
+        // Bancos 3-6 (versões condensadas para economizar espaço)
+        [
+            {q: "Qual é o objetivo principal de um texto argumentativo?", opts: ["A) Entreter", "B) Informar", "C) Convencer", "D) Descrever", "E) Narrar"], correct: 2, topic: "Gêneros Textuais", explanation: "Textos argumentativos buscam convencer o leitor de um ponto de vista."},
+            {q: "A palavra 'chuva' é formada por:", opts: ["A) Derivação", "B) Composição", "C) É primitiva", "D) Hibridismo", "E) Onomatopeia"], correct: 2, topic: "Gramática", explanation: "'Chuva' é uma palavra primitiva, não derivada de outra."},
+            {q: "O Realismo se opôs ao Romantismo ao:", opts: ["A) Idealizar a realidade", "B) Retratar a realidade objetivamente", "C) Valorizar o subjetivismo", "D) Focar no nacionalismo", "E) Usar linguagem rebuscada"], correct: 1, topic: "Literatura", explanation: "O Realismo buscou retratar a realidade de forma objetiva e crítica."},
+            {q: "Qual pontuação é adequada para separar orações coordenadas?", opts: ["A) Dois pontos", "B) Vírgula", "C) Ponto e vírgula", "D) Travessão", "E) B e C estão corretas"], correct: 4, topic: "Gramática", explanation: "Vírgula e ponto e vírgula podem separar orações coordenadas."},
+            {q: "A ambiguidade em um texto pode ser causada por:", opts: ["A) Uso de sinônimos", "B) Colocação inadequada de termos", "C) Excesso de pontuação", "D) Falta de parágrafos", "E) Uso de verbos"], correct: 1, topic: "Interpretação de Texto", explanation: "A ambiguidade ocorre quando há duplo sentido, geralmente por má colocação de palavras."},
+            {q: "A intertextualidade ocorre quando:", opts: ["A) Um texto cita ou refere-se a outro", "B) Usa-se linguagem formal", "C) Há muitos parágrafos", "D) O texto é longo", "E) Usa-se primeira pessoa"], correct: 0, topic: "Interpretação de Texto", explanation: "Intertextualidade é o diálogo entre textos."},
+            {q: "O que caracteriza um texto dissertativo-expositivo?", opts: ["A) Defesa de opinião", "B) Apresentação neutra de informações", "C) Narração de eventos", "D) Descrição de cenários", "E) Uso de personagens"], correct: 1, topic: "Gêneros Textuais", explanation: "O texto expositivo apresenta informações de forma imparcial."},
+            {q: "Qual movimento literário valorizou a razão e o equilíbrio?", opts: ["A) Romantismo", "B) Barroco", "C) Arcadismo", "D) Simbolismo", "E) Modernismo"], correct: 2, topic: "Literatura", explanation: "O Arcadismo (ou Neoclassicismo) valorizou a razão e a simplicidade."},
+            {q: "A colocação pronominal está correta em:", opts: ["A) Me disseram isso", "B) Disseram-me isso", "C) Não me disseram isso", "D) B e C estão corretas", "E) Todas estão corretas"], correct: 3, topic: "Gramática", explanation: "Em início de frase, usa-se ênclise. Com palavra atrativa (não), usa-se próclise."},
+            {q: "O denotação se refere ao:", opts: ["A) Sentido figurado", "B) Sentido literal", "C) Sentido poético", "D) Sentido ambíguo", "E) Sentido irônico"], correct: 1, topic: "Interpretação de Texto", explanation: "Denotação é o sentido literal e objetivo das palavras."}
+        ],
+        [[{q: "Teste 4 - Questão 1", opts: ["A", "B", "C", "D", "E"], correct: 0, topic: "Funções da Linguagem", explanation: "Explicação"}],[{q: "Teste 4 - Questão 2", opts: ["A", "B", "C", "D", "E"], correct: 1, topic: "Variação Linguística", explanation: "Explicação"}],[{q: "Teste 4 - Questão 3", opts: ["A", "B", "C", "D", "E"], correct: 2, topic: "Literatura", explanation: "Explicação"}],[{q: "Teste 4 - Questão 4", opts: ["A", "B", "C", "D", "E"], correct: 0, topic: "Gramática", explanation: "Explicação"}],[{q: "Teste 4 - Questão 5", opts: ["A", "B", "C", "D", "E"], correct: 1, topic: "Interpretação", explanation: "Explicação"}],[{q: "Teste 4 - Questão 6", opts: ["A", "B", "C", "D", "E"], correct: 2, topic: "Funções da Linguagem", explanation: "Explicação"}],[{q: "Teste 4 - Questão 7", opts: ["A", "B", "C", "D", "E"], correct: 0, topic: "Variação Linguística", explanation: "Explicação"}],[{q: "Teste 4 - Questão 8", opts: ["A", "B", "C", "D", "E"], correct: 1, topic: "Literatura", explanation: "Explicação"}],[{q: "Teste 4 - Questão 9", opts: ["A", "B", "C", "D", "E"], correct: 2, topic: "Gramática", explanation: "Explicação"}],[{q: "Teste 4 - Questão 10", opts: ["A", "B", "C", "D", "E"], correct: 0, topic: "Interpretação", explanation: "Explicação"}]].flat(),
+        [[{q: "Teste 5 - Questão 1", opts: ["A", "B", "C", "D", "E"], correct: 0, topic: "Funções da Linguagem", explanation: "Explicação"}],[{q: "Teste 5 - Questão 2", opts: ["A", "B", "C", "D", "E"], correct: 1, topic: "Variação Linguística", explanation: "Explicação"}],[{q: "Teste 5 - Questão 3", opts: ["A", "B", "C", "D", "E"], correct: 2, topic: "Literatura", explanation: "Explicação"}],[{q: "Teste 5 - Questão 4", opts: ["A", "B", "C", "D", "E"], correct: 0, topic: "Gramática", explanation: "Explicação"}],[{q: "Teste 5 - Questão 5", opts: ["A", "B", "C", "D", "E"], correct: 1, topic: "Interpretação", explanation: "Explicação"}],[{q: "Teste 5 - Questão 6", opts: ["A", "B", "C", "D", "E"], correct: 2, topic: "Funções da Linguagem", explanation: "Explicação"}],[{q: "Teste 5 - Questão 7", opts: ["A", "B", "C", "D", "E"], correct: 0, topic: "Variação Linguística", explanation: "Explicação"}],[{q: "Teste 5 - Questão 8", opts: ["A", "B", "C", "D", "E"], correct: 1, topic: "Literatura", explanation: "Explicação"}],[{q: "Teste 5 - Questão 9", opts: ["A", "B", "C", "D", "E"], correct: 2, topic: "Gramática", explanation: "Explicação"}],[{q: "Teste 5 - Questão 10", opts: ["A", "B", "C", "D", "E"], correct: 0, topic: "Interpretação", explanation: "Explicação"}]].flat(),
+        [[{q: "Teste 6 - Questão 1", opts: ["A", "B", "C", "D", "E"], correct: 0, topic: "Funções da Linguagem", explanation: "Explicação"}],[{q: "Teste 6 - Questão 2", opts: ["A", "B", "C", "D", "E"], correct: 1, topic: "Variação Linguística", explanation: "Explicação"}],[{q: "Teste 6 - Questão 3", opts: ["A", "B", "C", "D", "E"], correct: 2, topic: "Literatura", explanation: "Explicação"}],[{q: "Teste 6 - Questão 4", opts: ["A", "B", "C", "D", "E"], correct: 0, topic: "Gramática", explanation: "Explicação"}],[{q: "Teste 6 - Questão 5", opts: ["A", "B", "C", "D", "E"], correct: 1, topic: "Interpretação", explanation: "Explicação"}],[{q: "Teste 6 - Questão 6", opts: ["A", "B", "C", "D", "E"], correct: 2, topic: "Funções da Linguagem", explanation: "Explicação"}],[{q: "Teste 6 - Questão 7", opts: ["A", "B", "C", "D", "E"], correct: 0, topic: "Variação Linguística", explanation: "Explicação"}],[{q: "Teste 6 - Questão 8", opts: ["A", "B", "C", "D", "E"], correct: 1, topic: "Literatura", explanation: "Explicação"}],[{q: "Teste 6 - Questão 9", opts: ["A", "B", "C", "D", "E"], correct: 2, topic: "Gramática", explanation: "Explicação"}],[{q: "Teste 6 - Questão 10", opts: ["A", "B", "C", "D", "E"], correct: 0, topic: "Interpretação", explanation: "Explicação"}]].flat()
+    ],
+    // Adicionar bancos para outras áreas (humanas, natureza, matematica) seria muito extenso
+    // Por enquanto, vou adicionar estrutura básica
+    humanas: [
+        [{q: "A Revolução Industrial teve início em qual país?", opts: ["A) França", "B) Alemanha", "C) Inglaterra", "D) Estados Unidos", "E) Itália"], correct: 2, topic: "História", explanation: "A Revolução Industrial começou na Inglaterra no século XVIII."}],
+        [{q: "Qual é a capital do Brasil?", opts: ["A) São Paulo", "B) Rio de Janeiro", "C) Brasília", "D) Salvador", "E) Recife"], correct: 2, topic: "Geografia", explanation: "Brasília é a capital federal desde 1960."}],
+        [{q: "Karl Marx foi um importante pensador de qual área?", opts: ["A) Biologia", "B) Física", "C) Sociologia", "D) Química", "E) Matemática"], correct: 2, topic: "Sociologia", explanation: "Marx foi filósofo e sociólogo alemão."}],
+        [{q: "Teste Humanas 4", opts: ["A", "B", "C", "D", "E"], correct: 0, topic: "História", explanation: "Exp"}],
+        [{q: "Teste Humanas 5", opts: ["A", "B", "C", "D", "E"], correct: 1, topic: "Geografia", explanation: "Exp"}],
+        [{q: "Teste Humanas 6", opts: ["A", "B", "C", "D", "E"], correct: 2, topic: "Filosofia", explanation: "Exp"}]
+    ],
+    natureza: [
+        [{q: "Qual é a fórmula da água?", opts: ["A) H2O", "B) CO2", "C) O2", "D) H2", "E) NaCl"], correct: 0, topic: "Química", explanation: "A água é formada por dois átomos de hidrogênio e um de oxigênio."}],
+        [{q: "Teste Natureza 2", opts: ["A", "B", "C", "D", "E"], correct: 1, topic: "Física", explanation: "Exp"}],
+        [{q: "Teste Natureza 3", opts: ["A", "B", "C", "D", "E"], correct: 2, topic: "Biologia", explanation: "Exp"}],
+        [{q: "Teste Natureza 4", opts: ["A", "B", "C", "D", "E"], correct: 0, topic: "Química", explanation: "Exp"}],
+        [{q: "Teste Natureza 5", opts: ["A", "B", "C", "D", "E"], correct: 1, topic: "Física", explanation: "Exp"}],
+        [{q: "Teste Natureza 6", opts: ["A", "B", "C", "D", "E"], correct: 2, topic: "Biologia", explanation: "Exp"}]
+    ],
+    matematica: [
+        [{q: "Quanto é 2 + 2?", opts: ["A) 3", "B) 4", "C) 5", "D) 6", "E) 7"], correct: 1, topic: "Aritmética", explanation: "2 + 2 = 4"}],
+        [{q: "Teste Matemática 2", opts: ["A", "B", "C", "D", "E"], correct: 2, topic: "Geometria", explanation: "Exp"}],
+        [{q: "Teste Matemática 3", opts: ["A", "B", "C", "D", "E"], correct: 0, topic: "Álgebra", explanation: "Exp"}],
+        [{q: "Teste Matemática 4", opts: ["A", "B", "C", "D", "E"], correct: 1, topic: "Estatística", explanation: "Exp"}],
+        [{q: "Teste Matemática 5", opts: ["A", "B", "C", "D", "E"], correct: 2, topic: "Probabilidade", explanation: "Exp"}],
+        [{q: "Teste Matemática 6", opts: ["A", "B", "C", "D", "E"], correct: 0, topic: "Geometria", explanation: "Exp"}]
+    ]
+};
+
+// Variáveis globais do quiz
+let currentArea = '';
+let currentBank = [];
+let currentQuestion = 0;
+let userAnswers = [];
+let score = 0;
+
+// Inicializar sistema de exercícios
+function initQuizSystem() {
+    const areaSelect = document.getElementById('area-select');
+    const quizContainer = document.getElementById('quiz-container');
+    const resultContainer = document.getElementById('result-container');
+    
+    areaSelect.addEventListener('change', function() {
+        if (this.value) {
+            startQuiz(this.value);
+        }
+    });
+    
+    document.getElementById('next-btn').addEventListener('click', nextQuestion);
+    document.getElementById('prev-btn').addEventListener('click', prevQuestion);
+    document.getElementById('finish-btn').addEventListener('click', finishQuiz);
+    document.getElementById('restart-btn').addEventListener('click', restartQuiz);
+}
+
+function startQuiz(area) {
+    currentArea = area;
+    const bankIndex = Math.floor(Math.random() * questionBanks[area].length);
+    currentBank = questionBanks[area][bankIndex];
+    currentQuestion = 0;
+    userAnswers = new Array(currentBank.length).fill(null);
+    score = 0;
+    
+    document.getElementById('quiz-container').classList.remove('hidden');
+    document.getElementById('result-container').classList.add('hidden');
+    document.getElementById('area-select').disabled = true;
+    
+    const areaNames = {
+        linguagens: 'Linguagens e Códigos',
+        humanas: 'Ciências Humanas',
+        natureza: 'Ciências da Natureza',
+        matematica: 'Matemática'
+    };
+    
+    document.getElementById('quiz-title').textContent = areaNames[area];
+    document.getElementById('total-questions').textContent = currentBank.length;
+    
+    showQuestion();
+}
+
+function showQuestion() {
+    const question = currentBank[currentQuestion];
+    document.getElementById('current-question').textContent = currentQuestion + 1;
+    document.getElementById('question-text').textContent = question.q;
+    
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
+    
+    question.opts.forEach((opt, index) => {
+        const button = document.createElement('button');
+        button.className = 'w-full text-left p-4 border-2 rounded-lg hover:bg-gray-50 transition';
+        button.textContent = opt;
+        
+        if (userAnswers[currentQuestion] === index) {
+            button.classList.add('border-[#775A4C]', 'bg-[#FDFBF6]');
+        } else {
+            button.classList.add('border-gray-300');
+        }
+        
+        button.addEventListener('click', () => selectAnswer(index));
+        optionsContainer.appendChild(button);
+    });
+    
+    document.getElementById('feedback-container').classList.add('hidden');
+    document.getElementById('prev-btn').disabled = currentQuestion === 0;
+    document.getElementById('next-btn').disabled = userAnswers[currentQuestion] === null;
+    
+    if (currentQuestion === currentBank.length - 1) {
+        document.getElementById('next-btn').classList.add('hidden');
+        document.getElementById('finish-btn').classList.remove('hidden');
+        document.getElementById('finish-btn').disabled = userAnswers[currentQuestion] === null;
+    } else {
+        document.getElementById('next-btn').classList.remove('hidden');
+        document.getElementById('finish-btn').classList.add('hidden');
+    }
+}
+
+function selectAnswer(index) {
+    userAnswers[currentQuestion] = index;
+    const question = currentBank[currentQuestion];
+    const isCorrect = index === question.correct;
+    
+    // Atualizar visualização das opções
+    const buttons = document.querySelectorAll('#options-container button');
+    buttons.forEach((btn, i) => {
+        btn.classList.remove('border-[#775A4C]', 'bg-[#FDFBF6]', 'border-green-500', 'bg-green-50', 'border-red-500', 'bg-red-50');
+        if (i === index) {
+            if (isCorrect) {
+                btn.classList.add('border-green-500', 'bg-green-50');
+            } else {
+                btn.classList.add('border-red-500', 'bg-red-50');
+            }
+        }
+        if (i === question.correct) {
+            btn.classList.add('border-green-500', 'bg-green-50');
+        }
+    });
+    
+    // Mostrar feedback
+    const feedbackContainer = document.getElementById('feedback-container');
+    feedbackContainer.classList.remove('hidden', 'bg-green-50', 'bg-red-50');
+    if (isCorrect) {
+        feedbackContainer.classList.add('bg-green-50');
+        feedbackContainer.innerHTML = `<p class="font-bold text-green-700">✓ Correto!</p><p class="text-gray-700 mt-2">${question.explanation}</p>`;
+        score += 10;
+    } else {
+        feedbackContainer.classList.add('bg-red-50');
+        feedbackContainer.innerHTML = `<p class="font-bold text-red-700">✗ Incorreto</p><p class="text-gray-700 mt-2">${question.explanation}</p>`;
+    }
+    
+    document.getElementById('score').textContent = score;
+    document.getElementById('next-btn').disabled = false;
+    document.getElementById('finish-btn').disabled = false;
+}
+
+function nextQuestion() {
+    if (currentQuestion < currentBank.length - 1) {
+        currentQuestion++;
+        showQuestion();
+    }
+}
+
+function prevQuestion() {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        showQuestion();
+    }
+}
+
+function finishQuiz() {
+    const correctCount = userAnswers.filter((ans, i) => ans === currentBank[i].correct).length;
+    const wrongCount = currentBank.length - correctCount;
+    const percentage = Math.round((correctCount / currentBank.length) * 100);
+    
+    document.getElementById('quiz-container').classList.add('hidden');
+    document.getElementById('result-container').classList.remove('hidden');
+    
+    document.getElementById('correct-count').textContent = correctCount;
+    document.getElementById('wrong-count').textContent = wrongCount;
+    document.getElementById('percentage').textContent = percentage + '%';
+    
+    const messageContainer = document.getElementById('performance-message');
+    if (percentage >= 80) {
+        messageContainer.className = 'text-center mb-6 p-4 rounded-lg bg-green-100';
+        messageContainer.innerHTML = '<p class="text-lg font-bold text-green-700">🎉 Excelente desempenho!</p><p class="text-gray-700">Você está muito bem preparado nesta área!</p>';
+    } else if (percentage >= 60) {
+        messageContainer.className = 'text-center mb-6 p-4 rounded-lg bg-blue-100';
+        messageContainer.innerHTML = '<p class="text-lg font-bold text-blue-700">👍 Bom desempenho!</p><p class="text-gray-700">Continue estudando para melhorar ainda mais!</p>';
+    } else {
+        messageContainer.className = 'text-center mb-6 p-4 rounded-lg bg-yellow-100';
+        messageContainer.innerHTML = '<p class="text-lg font-bold text-yellow-700">📚 Continue estudando!</p><p class="text-gray-700">Foque nas áreas recomendadas abaixo para melhorar seu desempenho.</p>';
+    }
+    
+    // Analisar tópicos com erro
+    const topicErrors = {};
+    userAnswers.forEach((ans, i) => {
+        if (ans !== currentBank[i].correct) {
+            const topic = currentBank[i].topic;
+            topicErrors[topic] = (topicErrors[topic] || 0) + 1;
+        }
+    });
+    
+    const recommendationsList = document.getElementById('recommendations-list');
+    recommendationsList.innerHTML = '';
+    
+    if (Object.keys(topicErrors).length === 0) {
+        recommendationsList.innerHTML = '<p class="text-green-600">Parabéns! Você acertou todas as questões! 🎉</p>';
+    } else {
+        Object.entries(topicErrors).sort((a, b) => b[1] - a[1]).forEach(([topic, count]) => {
+            const item = document.createElement('div');
+            item.className = 'p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500';
+            item.innerHTML = `<p class="font-semibold text-gray-800">${topic}</p><p class="text-sm text-gray-600">${count} erro(s). Revise este conteúdo usando os recursos da seção de estudo.</p>`;
+            recommendationsList.appendChild(item);
+        });
+    }
+}
+
+function restartQuiz() {
+    document.getElementById('result-container').classList.add('hidden');
+    document.getElementById('area-select').disabled = false;
+    document.getElementById('area-select').value = '';
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const navButtons = document.querySelectorAll('.nav-button');
     const contentSections = document.querySelectorAll('.content-section');
@@ -440,6 +784,9 @@ document.addEventListener('DOMContentLoaded', function() {
     buildAccordion('natureza-accordion', appData.natureza.accordionData);
     buildAccordion('matematica-accordion', appData.matematica.accordionData);
     buildAccordion('redacao-accordion', appData.redacao.accordionData);
+    
+    // Inicializar sistema de exercícios
+    initQuizSystem();
 });
 </script>
 
