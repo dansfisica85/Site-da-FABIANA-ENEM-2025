@@ -70,6 +70,7 @@
 
         <nav class="flex flex-wrap justify-center gap-4 md:gap-8 mb-12 border-b pb-4">
             <button data-target="plataformas" class="nav-button active text-base md:text-lg px-3 py-2">Plataformas e Ferramentas</button>
+            <button data-target="exercicios" class="nav-button text-base md:text-lg px-3 py-2">📝 Exercícios</button>
             <button data-target="linguagens" class="nav-button text-base md:text-lg px-3 py-2">Linguagens</button>
             <button data-target="humanas" class="nav-button text-base md:text-lg px-3 py-2">Humanas</button>
             <button data-target="natureza" class="nav-button text-base md:text-lg px-3 py-2">Natureza</button>
@@ -196,23 +197,24 @@ const appData = {
                 title: 'Interpretação de Texto',
                 content: 'É a habilidade mais cobrada. Envolve a compreensão de textos verbais e não verbais, como charges, tirinhas e gráficos.',
                 resources: [
-                    { name: 'Canal Português com Alexandre', link: 'https://www.youtube.com/@portuguescomaléxandre', why: 'Aulas completas sobre estratégias de interpretação textual e análise de textos para o ENEM.' },
-                    { name: 'Artigo e Exercícios (Toda Matéria)', link: 'https://www.todamateria.com.br/interpretacao-de-textos/', why: 'Um guia teórico robusto com exercícios ao final para você testar seus conhecimentos.' }
+                    { name: 'Canal Descomplica - Português', link: 'https://www.youtube.com/@descomplica', why: 'Aulas completas sobre estratégias de interpretação textual e análise de textos para o ENEM.' },
+                    { name: 'Guia de Interpretação de Textos', link: 'https://brasilescola.uol.com.br/redacao/interpretacao-texto.htm', why: 'Um guia teórico robusto com dicas práticas para você melhorar sua compreensão textual.' }
                 ]
             },
             {
                 title: 'Funções da Linguagem',
                 content: 'Entender a intenção por trás de cada texto (emotiva, referencial, conativa, etc.) é fundamental para a prova.',
                 resources: [
-                    { name: 'Canal Descomplica - Português', link: 'https://www.youtube.com/@descomplica', why: 'Aulas dinâmicas e cheia de exemplos que facilitam a compreensão das funções da linguagem.' },
+                    { name: 'Canal Descomplica - Funções da Linguagem', link: 'https://www.youtube.com/@descomplica', why: 'Aulas dinâmicas e cheias de exemplos que facilitam a compreensão das funções da linguagem.' },
+                    { name: 'Artigo Completo (Brasil Escola)', link: 'https://brasilescola.uol.com.br/gramatica/funcoes-linguagem.htm', why: 'Material completo sobre as 6 funções da linguagem com exemplos práticos.' }
                 ]
             },
             {
                 title: 'Variação Linguística',
                 content: 'Compreender as diferentes formas da língua (regional, social, histórica) e o combate ao preconceito linguístico.',
                 resources: [
-                    { name: 'Canal Português com Alexandre', link: 'https://www.youtube.com/@portuguescomaléxandre', why: 'Explica de forma clara e com exemplos do dia a dia os tipos de variação linguística.' },
-                    { name: 'Artigo (Brasil Escola)', link: 'https://brasilescola.uol.com.br/gramatica/variacao-linguistica.htm', why: 'Material de leitura excelente para fixar os conceitos e as diferenças entre cada tipo de variação.'}
+                    { name: 'Explicação Completa (Brasil Escola)', link: 'https://brasilescola.uol.com.br/gramatica/variacao-linguistica.htm', why: 'Explica de forma clara e com exemplos os tipos de variação linguística e o preconceito linguístico.' },
+                    { name: 'Khan Academy - Português', link: 'https://pt.khanacademy.org/', why: 'Plataforma interativa com exercícios e vídeos sobre variação linguística.'}
                 ]
             }
         ]
@@ -227,23 +229,24 @@ const appData = {
                 title: 'Idade Contemporânea (Brasil e Mundo)',
                 content: 'Foco em Revolução Industrial, Guerras Mundiais, Guerra Fria e, no Brasil, a Era Vargas e a Ditadura Militar.',
                 resources: [
-                    { name: 'Canal Aulas de História Online', link: 'https://www.youtube.com/@aulasdehistoriaonline1', why: 'Um dos melhores canais de história, com aulas detalhadas e envolventes sobre os períodos mais importantes do Brasil.' },
-                    { name: 'Canal Eduardão Enem - História', link: 'https://www.youtube.com/@eduardaoenem', why: 'Didática excelente para entender os complexos eventos das Grandes Guerras e períodos históricos de forma clara.' }
+                    { name: 'Canal Descomplica - História', link: 'https://www.youtube.com/@descomplica', why: 'Um dos melhores canais com aulas detalhadas sobre história contemporânea e períodos importantes do Brasil.' },
+                    { name: 'História Contemporânea (Brasil Escola)', link: 'https://brasilescola.uol.com.br/historiag/idade-contemporanea.htm', why: 'Artigos completos sobre os eventos das Guerras Mundiais e períodos históricos recentes.' }
                 ]
             },
             {
                 title: 'Questões Ambientais',
                 content: 'Aquecimento global, desmatamento, crises hídricas e problemas ambientais urbanos são temas recorrentes.',
                 resources: [
-                    { name: 'Canal Geografia com Prof. Rodolfo', link: 'https://www.youtube.com/@geografiacomprofrodolofo', why: 'Aulas atualizadas que conectam os principais problemas ambientais da atualidade com suas causas e consequências.' },
-                    { name: 'Artigo (Mundo Educação)', link: 'https://mundoeducacao.uol.com.br/geografia/problemas-ambientais.htm', why: 'Material de leitura completo para aprofundar nos diversos tipos de problemas ambientais.' }
+                    { name: 'Problemas Ambientais (Brasil Escola)', link: 'https://brasilescola.uol.com.br/geografia/problemas-ambientais.htm', why: 'Aulas atualizadas que conectam os principais problemas ambientais da atualidade com suas causas e consequências.' },
+                    { name: 'Canal Descomplica - Geografia', link: 'https://www.youtube.com/@descomplica', why: 'Vídeoaulas sobre questões ambientais e sustentabilidade para o ENEM.' }
                 ]
             },
              {
                 title: 'Filosofia e Sociologia',
                 content: 'Conceitos de ética, política, cidadania, indústria cultural, movimentos sociais e pensadores clássicos (Platão, Aristóteles, Maquiavel, Contratualistas, Marx, Weber).',
                 resources: [
-                    { name: 'Canal Descomplica - Filosofia e Sociologia', link: 'https://www.youtube.com/@descomplica', why: 'Playlists completas com os principais sociólogos e conceitos que caem na prova.' },
+                    { name: 'Filosofia (Brasil Escola)', link: 'https://brasilescola.uol.com.br/filosofia/', why: 'Material completo com os principais filósofos e conceitos que caem na prova.' },
+                    { name: 'Sociologia (Brasil Escola)', link: 'https://brasilescola.uol.com.br/sociologia/', why: 'Artigos sobre os principais sociólogos e conceitos sociológicos.' }
                 ]
             }
         ]
@@ -258,21 +261,24 @@ const appData = {
                 title: 'Ecologia e Meio Ambiente',
                 content: 'Relações ecológicas, ciclos biogeoquímicos, poluição e sustentabilidade. É o tema mais frequente em Biologia.',
                 resources: [
-                    { name: 'Canal Biologia com Samuel Cunha', link: 'https://www.youtube.com/@biologiacomsamuelcunha', why: 'Aulas completas sobre ecologia, com conteúdo atualizado e didática clara para o ENEM.' },
+                    { name: 'Ecologia (Brasil Escola)', link: 'https://brasilescola.uol.com.br/biologia/ecologia.htm', why: 'Aulas completas sobre ecologia, com conteúdo atualizado e material didático excelente para o ENEM.' },
+                    { name: 'Canal Descomplica - Biologia', link: 'https://www.youtube.com/@descomplica', why: 'Vídeoaulas sobre ecologia e meio ambiente.' }
                 ]
             },
             {
                 title: 'Eletrodinâmica',
                 content: 'Circuitos elétricos, Leis de Ohm, potência e consumo de energia. Um clássico da prova de Física.',
                 resources: [
-                    { name: 'Canal Física Audiovisual', link: 'https://www.youtube.com/@fisicaaudiovisual', why: 'Aulas extremamente detalhadas sobre eletrodinâmica, ideal para aprender o conteúdo do zero ou revisar a fundo.' },
+                    { name: 'Eletrodinâmica (Brasil Escola)', link: 'https://brasilescola.uol.com.br/fisica/eletrodinamica.htm', why: 'Artigos extremamente detalhados sobre eletrodinâmica, ideal para aprender o conteúdo do zero ou revisar a fundo.' },
+                    { name: 'Canal Descomplica - Física', link: 'https://www.youtube.com/@descomplica', why: 'Aulas sobre circuitos elétricos e eletrodinâmica.' }
                 ]
             },
             {
                 title: 'Química Orgânica',
                 content: 'Funções orgânicas, reações, isomeria e polímeros. Conteúdo extenso e muito relevante.',
                 resources: [
-                    { name: 'Canal Parabólica Química', link: 'https://www.youtube.com/@parabolicaquimica', why: 'Professor com didática incrível que simplifica a Química Orgânica de forma criativa e prática.' }
+                    { name: 'Química Orgânica (Brasil Escola)', link: 'https://brasilescola.uol.com.br/quimica/quimica-organica.htm', why: 'Material completo que simplifica a Química Orgânica de forma didática e prática.' },
+                    { name: 'Canal Descomplica - Química', link: 'https://www.youtube.com/@descomplica', why: 'Videoaulas sobre funções orgânicas e reações químicas.' }
                 ]
             }
         ]
@@ -287,7 +293,7 @@ const appData = {
                 title: 'Razão e Proporção',
                 content: 'O campeão de incidência. Envolve regra de três, porcentagem, escalas. É a base da matemática do ENEM.',
                 resources: [
-                    { name: 'Canal Professor Ferretto - Razão e Proporção', link: 'https://www.youtube.com/@professorferretto', why: 'Ferretto é conhecido pela sua didática impecável e aprofundamento. Aulas essenciais para dominar o básico.' },
+                    { name: 'Canal Professor Ferretto', link: 'https://www.youtube.com/@professorferretto', why: 'Ferretto é conhecido pela sua didática impecável e aprofundamento. Aulas essenciais para dominar o básico.' },
                     { name: 'Exercícios (Khan Academy)', link: 'https://pt.khanacademy.org/math/pre-algebra/pre-algebra-ratios-rates', why: 'Plataforma interativa para praticar com exercícios de todos os níveis de dificuldade.' }
                 ]
             },
@@ -295,15 +301,16 @@ const appData = {
                 title: 'Geometria (Plana e Espacial)',
                 content: 'Cálculos de área, volume e perímetros. É fundamental dominar as fórmulas e a visualização espacial.',
                 resources: [
-                    { name: 'Canal Aulas de Matemática - Prof Diego', link: 'https://www.youtube.com/@aulasdematemticaprofdiego5047', why: 'Revisões completas com os principais conceitos e fórmulas de geometria plana e espacial para o ENEM.' },
-                    { name: 'Formulário de Geometria Espacial (Me Salva!)', link: 'https://mesalva.com/blog/wp-content/uploads/2016/10/Fórmulas-de-Geometria-Espacial.pdf', why: 'Um PDF direto ao ponto com todas as fórmulas que você precisa memorizar.'}
+                    { name: 'Geometria (Brasil Escola)', link: 'https://brasilescola.uol.com.br/matematica/geometria.htm', why: 'Revisões completas com os principais conceitos e fórmulas de geometria plana e espacial para o ENEM.' },
+                    { name: 'Canal Descomplica - Matemática', link: 'https://www.youtube.com/@descomplica', why: 'Videoaulas sobre geometria plana e espacial com exercícios resolvidos.'}
                 ]
             },
             {
                 title: 'Estatística Básica',
                 content: 'Cálculo e interpretação de média, moda, mediana e desvio padrão. Sempre presente na prova.',
                 resources: [
-                    { name: 'Canal Professor Ferretto - Estatística', link: 'https://www.youtube.com/@professorferretto', why: 'Aulas que resolvem questões do ENEM enquanto explicam a teoria de forma muito clara.' },
+                    { name: 'Estatística (Brasil Escola)', link: 'https://brasilescola.uol.com.br/matematica/estatistica.htm', why: 'Aulas que resolvem questões do ENEM enquanto explicam a teoria de forma muito clara.' },
+                    { name: 'Khan Academy - Estatística', link: 'https://pt.khanacademy.org/math/statistics-probability', why: 'Exercícios interativos de estatística.' }
                 ]
             }
         ]
@@ -314,15 +321,15 @@ const appData = {
                 title: 'Estrutura do Texto Dissertativo-Argumentativo',
                 content: 'Dominar a organização em introdução (com tese), desenvolvimento (com argumentos) e conclusão (com proposta de intervenção).',
                 resources: [
-                    { name: 'Canal Projeto Redação - Estrutura', link: 'https://www.youtube.com/@projetoredacao', why: 'Vídeos que detalham cada parágrafo da redação do ENEM, com exemplos práticos e dicas essenciais.' },
-                    { name: 'Guia do Participante (Oficial INEP)', link: 'https://download.inep.gov.br/publicacoes/institucionais/avaliacoes_e_exames_da_educacao_basica/a_redacao_do_enem_2023_cartilha_do_participante.pdf', why: 'O manual oficial com todas as regras e critérios de correção. Leitura obrigatória.'}
+                    { name: 'Redação ENEM (Brasil Escola)', link: 'https://brasilescola.uol.com.br/redacao/redacao-enem.htm', why: 'Guia completo que detalha cada parágrafo da redação do ENEM, com exemplos práticos e dicas essenciais.' },
+                    { name: 'Canal Descomplica - Redação', link: 'https://www.youtube.com/@descomplica', why: 'Videoaulas sobre estrutura dissertativa-argumentativa.' }
                 ]
             },
             {
                 title: 'Repertório Sociocultural',
                 content: 'Utilizar conhecimentos de outras áreas (história, filosofia, literatura, dados) para enriquecer sua argumentação.',
                 resources: [
-                    { name: 'Canal Eduardão Enem - Repertório para Redação', link: 'https://www.youtube.com/@eduardaoenem', why: 'Ensina a conectar notícias e temas atuais à sua argumentação de forma produtiva.' },
+                    { name: 'Repertório Sociocultural (Brasil Escola)', link: 'https://brasilescola.uol.com.br/redacao/repertorio-sociocultural.htm', why: 'Ensina a conectar notícias e temas atuais à sua argumentação de forma produtiva.' },
                     { name: 'Nexo Jornal - Seção Gráficos', link: 'https://www.nexojornal.com.br/grafico/', why: 'Fonte inesgotável de dados e informações visuais para usar como repertório na sua redação.'}
                 ]
             },
@@ -330,7 +337,7 @@ const appData = {
                 title: 'Competência 5: Proposta de Intervenção',
                 content: 'Criar uma proposta de solução detalhada para o problema, respondendo: Agente, Ação, Meio/Modo, Finalidade e Detalhamento.',
                 resources: [
-                    { name: 'Canal Projeto Redação - Proposta de Intervenção', link: 'https://www.youtube.com/@projetoredacao', why: 'Vídeos curtos e diretos que ensinam a construir uma proposta de intervenção completa.' }
+                    { name: 'Proposta de Intervenção (Brasil Escola)', link: 'https://brasilescola.uol.com.br/redacao/proposta-intervencao-na-redacao-enem.htm', why: 'Guia completo que ensina a construir uma proposta de intervenção nota 1000.' }
                 ]
             }
         ]
