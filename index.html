@@ -148,9 +148,43 @@
                     </select>
                 </div>
 
+                <!-- Configuração do Cronômetro -->
+                <div id="timer-config" class="max-w-2xl mx-auto mb-8 hidden">
+                    <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6 border-2 border-blue-200">
+                        <div class="flex items-center justify-between mb-4">
+                            <label class="text-lg font-semibold text-[#775A4C]">⏱️ Cronômetro (opcional):</label>
+                            <label class="flex items-center cursor-pointer">
+                                <input type="checkbox" id="timer-toggle" class="w-5 h-5 text-[#775A4C] rounded focus:ring-2 focus:ring-[#775A4C]">
+                                <span class="ml-2 text-sm text-gray-600">Ativar</span>
+                            </label>
+                        </div>
+                        <div id="timer-options" class="hidden">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Tempo limite:</label>
+                            <div class="grid grid-cols-4 gap-3">
+                                <button class="timer-option-btn px-4 py-2 border-2 border-gray-300 rounded-lg hover:border-[#775A4C] hover:bg-[#775A4C] hover:text-white transition-colors" data-minutes="15">15 min</button>
+                                <button class="timer-option-btn px-4 py-2 border-2 border-gray-300 rounded-lg hover:border-[#775A4C] hover:bg-[#775A4C] hover:text-white transition-colors" data-minutes="30">30 min</button>
+                                <button class="timer-option-btn px-4 py-2 border-2 border-gray-300 rounded-lg hover:border-[#775A4C] hover:bg-[#775A4C] hover:text-white transition-colors" data-minutes="45">45 min</button>
+                                <button class="timer-option-btn px-4 py-2 border-2 border-gray-300 rounded-lg hover:border-[#775A4C] hover:bg-[#775A4C] hover:text-white transition-colors" data-minutes="60">60 min</button>
+                            </div>
+                        </div>
+                        <button id="start-quiz-btn" class="w-full mt-4 px-6 py-3 bg-[#775A4C] text-white text-lg rounded-lg hover:bg-[#A08C7D] disabled:opacity-50 disabled:cursor-not-allowed" disabled>Iniciar Quiz →</button>
+                    </div>
+                </div>
+
                 <!-- Container do Quiz -->
                 <div id="quiz-container" class="max-w-4xl mx-auto hidden">
                     <div class="bg-white rounded-lg shadow-lg p-8 mb-6">
+                        <!-- Timer Display -->
+                        <div id="timer-display" class="hidden mb-6 p-4 rounded-lg border-2 text-center">
+                            <div class="flex items-center justify-center gap-3">
+                                <span class="text-2xl">⏱️</span>
+                                <div>
+                                    <p class="text-sm text-gray-600">Tempo Restante</p>
+                                    <p id="timer-text" class="text-3xl font-bold"></p>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="flex justify-between items-center mb-6">
                             <h3 id="quiz-title" class="text-2xl font-bold text-[#775A4C]"></h3>
                             <div class="text-right">
@@ -200,9 +234,22 @@
                             <div id="recommendations-list" class="space-y-3"></div>
                         </div>
 
-                        <div class="text-center">
-                            <button id="restart-btn" class="px-8 py-4 bg-[#775A4C] text-white text-lg rounded-lg hover:bg-[#A08C7D]">Fazer Outro Quiz</button>
+                        <div class="text-center flex gap-4 justify-center">
+                            <button id="review-btn" class="px-8 py-4 bg-blue-600 text-white text-lg rounded-lg hover:bg-blue-700">📋 Revisar Respostas</button>
+                            <button id="restart-btn" class="px-8 py-4 bg-[#775A4C] text-white text-lg rounded-lg hover:bg-[#A08C7D]">🔄 Fazer Outro Quiz</button>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Modo de Revisão -->
+                <div id="review-container" class="max-w-4xl mx-auto hidden">
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-3xl font-bold text-[#775A4C]">📋 Revisão de Respostas</h3>
+                            <button id="close-review-btn" class="px-6 py-3 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400">✕ Fechar</button>
+                        </div>
+
+                        <div id="review-content" class="space-y-6"></div>
                     </div>
                 </div>
             </section>
@@ -502,15 +549,66 @@ let currentQuestion = 0;
 let userAnswers = [];
 let score = 0;
 
+// Variáveis do cronômetro
+let timerEnabled = false;
+let timerMinutes = 0;
+let timerInterval = null;
+let timeRemaining = 0;
+
 // Inicializar sistema de exercícios
 function initQuizSystem() {
     const areaSelect = document.getElementById('area-select');
     const quizContainer = document.getElementById('quiz-container');
     const resultContainer = document.getElementById('result-container');
+    const timerConfig = document.getElementById('timer-config');
+    const timerToggle = document.getElementById('timer-toggle');
+    const timerOptions = document.getElementById('timer-options');
+    const startQuizBtn = document.getElementById('start-quiz-btn');
     
+    // Mostrar configuração do timer quando selecionar área
     areaSelect.addEventListener('change', function() {
         if (this.value) {
-            startQuiz(this.value);
+            timerConfig.classList.remove('hidden');
+            startQuizBtn.disabled = false;
+            currentArea = this.value;
+        } else {
+            timerConfig.classList.add('hidden');
+            startQuizBtn.disabled = true;
+        }
+    });
+    
+    // Toggle do cronômetro
+    timerToggle.addEventListener('change', function() {
+        timerEnabled = this.checked;
+        if (timerEnabled) {
+            timerOptions.classList.remove('hidden');
+        } else {
+            timerOptions.classList.add('hidden');
+            timerMinutes = 0;
+            document.querySelectorAll('.timer-option-btn').forEach(btn => {
+                btn.classList.remove('bg-[#775A4C]', 'text-white', 'border-[#775A4C]');
+                btn.classList.add('border-gray-300');
+            });
+        }
+    });
+    
+    // Seleção de tempo
+    document.querySelectorAll('.timer-option-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            timerMinutes = parseInt(this.dataset.minutes);
+            document.querySelectorAll('.timer-option-btn').forEach(b => {
+                b.classList.remove('bg-[#775A4C]', 'text-white', 'border-[#775A4C]');
+                b.classList.add('border-gray-300');
+            });
+            this.classList.remove('border-gray-300');
+            this.classList.add('bg-[#775A4C]', 'text-white', 'border-[#775A4C]');
+        });
+    });
+    
+    // Iniciar quiz
+    startQuizBtn.addEventListener('click', function() {
+        if (currentArea) {
+            startQuiz(currentArea);
         }
     });
     
@@ -518,6 +616,8 @@ function initQuizSystem() {
     document.getElementById('prev-btn').addEventListener('click', prevQuestion);
     document.getElementById('finish-btn').addEventListener('click', finishQuiz);
     document.getElementById('restart-btn').addEventListener('click', restartQuiz);
+    document.getElementById('review-btn').addEventListener('click', showReview);
+    document.getElementById('close-review-btn').addEventListener('click', closeReview);
 }
 
 function startQuiz(area) {
@@ -528,9 +628,17 @@ function startQuiz(area) {
     userAnswers = new Array(currentBank.length).fill(null);
     score = 0;
     
+    // Ocultar configuração do timer e mostrar quiz
+    document.getElementById('timer-config').classList.add('hidden');
     document.getElementById('quiz-container').classList.remove('hidden');
     document.getElementById('result-container').classList.add('hidden');
+    document.getElementById('review-container').classList.add('hidden');
     document.getElementById('area-select').disabled = true;
+    
+    // Iniciar cronômetro se ativado
+    if (timerEnabled && timerMinutes > 0) {
+        startTimer();
+    }
     
     const areaNames = {
         linguagens: 'Linguagens e Códigos',
